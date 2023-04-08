@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+    <!-- Remotes -->
+    <remote name="mahi" 
+        fetch="https://github.com/pawar-mahesh" 
+        revision="thirteen" />
+    
+    <remote name="los" 
+        fetch="https://github.com/LineageOS" 
+        revision="lineage-20" />
+    
+    <remote name="los-vendor" 
+        fetch="https://github.com/TheMuppets" 
+        revision="lineage-20" />
+
+    <!-- Trees -->
+    <project path="device/xiaomi/alioth" name="android_device_xiaomi_alioth" remote="mahi" />
+    <project path="device/xiaomi/sm8250-common" name="android_device_xiaomi_sm8250-common" remote="mahi" />
+
+    <project path="hardware/xiaomi" name="android_hardware_xiaomi" remote="los" />
+    <project path="kernel/xiaomi/sm8250" name="android_kernel_xiaomi_sm8250" remote="los" />
+    
+    <project path="vendor/xiaomi/alioth" name="proprietary_vendor_xiaomi_alioth" remote="los-vendor" />
+    <project path="vendor/xiaomi/sm8250-common" name="proprietary_vendor_xiaomi_sm8250-common" remote="los-vendor" />
+
+    <!-- Remove -->
+    <remove-project name="platform/build" />
+    <remove-project name="vendor_aosp"/>
+
+    <!-- Track modified -->
+    <project path="build/make" name="build" remote="mahi">
+        <copyfile src="core/root.mk" dest="Makefile" />
+        <linkfile src="CleanSpec.mk" dest="build/CleanSpec.mk" />
+        <linkfile src="buildspec.mk.default" dest="build/buildspec.mk.default" />
+        <linkfile src="core" dest="build/core" />
+        <linkfile src="envsetup.sh" dest="build/envsetup.sh" />
+        <linkfile src="target" dest="build/target" />
+        <linkfile src="tools" dest="build/tools" />
+    </project>
+    <project path="vendor/aosp" name="vendor_aosp" remote="mahi" />
+</manifest> 
